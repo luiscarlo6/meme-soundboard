@@ -1,4 +1,4 @@
-const CACHE_NAME = "meme-soundboard-v6";
+const CACHE_NAME = "meme-soundboard-v7";
 const APP_ASSETS = [
   "./",
   "./index.html",
@@ -17,6 +17,7 @@ self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_ASSETS))
   );
+  self.skipWaiting();
 });
 
 self.addEventListener("activate", (event) => {
@@ -45,6 +46,13 @@ self.addEventListener("fetch", (event) => {
     isSameOrigin &&
     (requestUrl.pathname.startsWith("/public/media/") ||
       requestUrl.pathname.startsWith("/data/"));
+  const isNavigationOrManifest =
+    isSameOrigin &&
+    (event.request.mode === "navigate" ||
+      requestUrl.pathname.endsWith(".html") ||
+      requestUrl.pathname.endsWith(".webmanifest") ||
+      requestUrl.pathname === "/" ||
+      requestUrl.pathname.endsWith("/"));
 
   if (isRuntimeAsset) {
     event.respondWith(
@@ -60,6 +68,27 @@ self.addEventListener("fetch", (event) => {
             return cached;
           }
 
+          throw error;
+        }
+      })
+    );
+    return;
+  }
+
+  if (isNavigationOrManifest) {
+    event.respondWith(
+      caches.open(CACHE_NAME).then(async (cache) => {
+        try {
+          const response = await fetch(event.request);
+          if (response.ok) {
+            cache.put(event.request, response.clone());
+          }
+          return response;
+        } catch (error) {
+          const cached = await cache.match(event.request);
+          if (cached) {
+            return cached;
+          }
           throw error;
         }
       })
