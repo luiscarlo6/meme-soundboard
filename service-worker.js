@@ -1,17 +1,13 @@
-const CACHE_NAME = "meme-soundboard-v2";
+const CACHE_NAME = "meme-soundboard-v3";
 const APP_ASSETS = [
   "./",
   "./index.html",
   "./styles.css",
   "./manifest.webmanifest",
   "./src/app.js",
-  "./src/memes.js",
+  "./data/memes.json",
   "./public/icons/icon-192.svg",
-  "./public/icons/icon-512.svg",
-  "./public/media/blue-lobster.gif",
-  "./public/media/blue-lobster.mp3",
-  "./public/media/sonic-coins.gif",
-  "./public/media/sonic-coins.mp3"
+  "./public/icons/icon-512.svg"
 ];
 
 self.addEventListener("install", (event) => {
@@ -34,6 +30,34 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") {
+    return;
+  }
+
+  const requestUrl = new URL(event.request.url);
+  const isSameOrigin = requestUrl.origin === self.location.origin;
+  const isRuntimeAsset =
+    isSameOrigin &&
+    (requestUrl.pathname.startsWith("/public/media/") ||
+      requestUrl.pathname.startsWith("/data/"));
+
+  if (isRuntimeAsset) {
+    event.respondWith(
+      caches.open(CACHE_NAME).then(async (cache) => {
+        const cached = await cache.match(event.request);
+
+        try {
+          const response = await fetch(event.request);
+          cache.put(event.request, response.clone());
+          return response;
+        } catch (error) {
+          if (cached) {
+            return cached;
+          }
+
+          throw error;
+        }
+      })
+    );
     return;
   }
 

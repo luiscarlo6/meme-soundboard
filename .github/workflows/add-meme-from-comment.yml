@@ -1,0 +1,135 @@
+name: Add Meme From GitHub Request
+
+on:
+  issues:
+    types: [opened, edited]
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  add-meme:
+    if: contains(github.event.comment.body || github.event.issue.body, '/add-meme')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Parse command
+        id: parse
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = context.payload.comment?.body || context.payload.issue?.body || "";
+            const lines = body.split(/\r?\n/);
+            const fields = {};
+            const requester = context.payload.comment?.user?.login || context.payload.issue?.user?.login || "unknown";
+            const requestUrl = context.payload.comment?.html_url || context.payload.issue?.html_url || "";
+            const requestId = String(context.payload.comment?.id || context.payload.issue?.number || Date.now());
+
+            for (const rawLine of lines) {
+              const line = rawLine.trim();
+              if (!line || line.startsWith("/add-meme")) {
+                continue;
+              }
+
+              const separatorIndex = line.indexOf(":");
+              if (separatorIndex === -1) {
+                continue;
+              }
+
+              const key = line.slice(0, separatorIndex).trim().toLowerCase();
+              const value = line.slice(separatorIndex + 1).trim();
+
+              if (value) {
+                fields[key] = value;
+              }
+            }
+
+            const requiredFields = ["title", "description", "gif_url", "audio_url"];
+            const missingFields = requiredFields.filter((field) => !fields[field]);
+
+            if (missingFields.length > 0) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: [
+                  "Missing required fields for `/add-meme`.",
+                  "",
+                  `Required: ${missingFields.join(", ")}`,
+                  "",
+                  "Expected format:",
+                  "```",
+                  "/add-meme",
+                  "title: Dramatic Fail",
+                  "description: Para cuando todo sale mal.",
+                  "gif_url: https://example.com/file.gif",
+                  "audio_url: https://example.com/file.mp3",
+                  "button_label: Play fail",
+                  "```"
+                ].join("\n")
+              });
+              core.setFailed(`Missing fields: ${missingFields.join(", ")}`);
+              return;
+            }
+
+            for (const [key, value] of Object.entries(fields)) {
+              core.setOutput(key, value);
+            }
+
+            core.setOutput("requester", requester);
+            core.setOutput("request_url", requestUrl);
+            core.setOutput("request_id", requestId);
+
+      - name: Add meme assets and update catalog
+        env:
+          MEME_TITLE: ${{ steps.parse.outputs.title }}
+          MEME_DESCRIPTION: ${{ steps.parse.outputs.description }}
+          MEME_GIF_URL: ${{ steps.parse.outputs.gif_url }}
+          MEME_AUDIO_URL: ${{ steps.parse.outputs.audio_url }}
+          MEME_BUTTON_LABEL: ${{ steps.parse.outputs.button_label }}
+        run: node scripts/add-meme.mjs
+
+      - name: Create pull request
+        id: cpr
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "Add meme: ${{ steps.parse.outputs.title }}"
+          branch: "codex/add-meme-${{ steps.parse.outputs.request_id }}"
+          delete-branch: true
+          title: "Add meme: ${{ steps.parse.outputs.title }}"
+          body: |
+            Added from GitHub request by @${{ steps.parse.outputs.requester }}.
+
+            Source request:
+            - Issue: #${{ github.event.issue.number }}
+            - URL: ${{ steps.parse.outputs.request_url }}
+
+            Asset sources:
+            - GIF: ${{ steps.parse.outputs.gif_url }}
+            - Audio: ${{ steps.parse.outputs.audio_url }}
+
+      - name: Comment with pull request link
+        if: steps.cpr.outputs.pull-request-url != ''
+        uses: actions/github-script@v7
+        env:
+          PR_URL: ${{ steps.cpr.outputs.pull-request-url }}
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `Created PR: ${process.env.PR_URL}`
+            });

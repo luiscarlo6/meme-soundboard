@@ -1,8 +1,7 @@
-import { memes } from "./memes.js";
-
 const grid = document.querySelector("#soundboardGrid");
 const template = document.querySelector("#cardTemplate");
 const installButton = document.querySelector("#installButton");
+const dataEndpoint = "./data/memes.json";
 
 let audioContext;
 let deferredPrompt;
@@ -57,7 +56,7 @@ const playAudioFile = async (source) => {
   await audio.play();
 };
 
-const renderCards = () => {
+const renderCards = (memes) => {
   const fragment = document.createDocumentFragment();
 
   memes.forEach((meme) => {
@@ -87,6 +86,20 @@ const renderCards = () => {
   });
 
   grid.appendChild(fragment);
+};
+
+const renderErrorState = (message) => {
+  grid.innerHTML = `<p class="empty-state">${message}</p>`;
+};
+
+const loadMemes = async () => {
+  const response = await fetch(dataEndpoint, { cache: "no-store" });
+
+  if (!response.ok) {
+    throw new Error(`Failed to load meme catalog: ${response.status}`);
+  }
+
+  return response.json();
 };
 
 const setupInstallPrompt = () => {
@@ -120,6 +133,17 @@ const registerServiceWorker = async () => {
   }
 };
 
-renderCards();
-setupInstallPrompt();
-registerServiceWorker();
+const bootstrap = async () => {
+  try {
+    const memes = await loadMemes();
+    renderCards(memes);
+  } catch (error) {
+    console.error(error);
+    renderErrorState("Could not load the meme catalog.");
+  }
+
+  setupInstallPrompt();
+  registerServiceWorker();
+};
+
+bootstrap();

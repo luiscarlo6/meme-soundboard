@@ -1,0 +1,28 @@
+[
+  {
+    "id": "blue-lobster-jumpscare-4k",
+    "title": "Blue Lobster Jumpscare 4K",
+    "description": "Immediate panic button for perfectly timed chaos.",
+    "image": "public/media/blue-lobster.gif",
+    "buttonLabel": "Play lobster",
+    "audio": "public/media/blue-lobster.mp3",
+    "source": {
+      "gifUrl": "",
+      "audioUrl": ""
+    },
+    "createdAt": "2026-03-08"
+  },
+  {
+    "id": "sonic-dropping-coins",
+    "title": "Sonic Dropping Coins",
+    "description": "For instant failure, damage, and wallet-collapse timing.",
+    "image": "public/media/sonic-coins.gif",
+    "buttonLabel": "Play coins",
+    "audio": "public/media/sonic-coins.mp3",
+    "source": {
+      "gifUrl": "",
+      "audioUrl": ""
+    },
+    "createdAt": "2026-03-08"
+  }
+]

@@ -120,6 +120,14 @@ code {
   gap: 1rem;
 }
 
+.empty-state {
+  margin: 0;
+  padding: 1rem 1.25rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.8);
+}
+
 .meme-card {
   display: grid;
   gap: 0.9rem;

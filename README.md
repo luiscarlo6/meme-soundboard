@@ -27,9 +27,51 @@ Then open `http://localhost:4173`.
 
 ## Customize the memes
 
-1. Replace the placeholder images in `public/media`.
-2. Update the entries in `src/memes.js`.
-3. If you switch from generated sounds to real audio files, replace the `sound` object with an audio file path and update `src/app.js` accordingly.
+The catalog now lives in `data/memes.json` and media files live in `public/media`.
+
+### Manual edits
+
+1. Add the media files to `public/media`.
+2. Add an entry to `data/memes.json`.
+
+### Automated ingest
+
+You can also add a meme from direct asset URLs with:
+
+```bash
+node scripts/add-meme.mjs
+```
+
+The script reads these environment variables:
+
+- `MEME_TITLE`
+- `MEME_DESCRIPTION`
+- `MEME_GIF_URL`
+- `MEME_AUDIO_URL`
+- `MEME_BUTTON_LABEL` (optional)
+
+It downloads the files, stores them in `public/media`, and updates `data/memes.json`.
+
+## GitHub request flow
+
+The repo includes a GitHub Action that listens for `/add-meme` requests in:
+
+- new issues
+- edited issues
+- issue comments
+
+Use direct asset URLs only. A valid request looks like:
+
+```text
+/add-meme
+title: Dramatic Fail
+description: Para cuando todo sale mal.
+gif_url: https://example.com/file.gif
+audio_url: https://example.com/file.mp3
+button_label: Play fail
+```
+
+When the workflow succeeds, it opens a pull request with the downloaded assets and catalog update.
 
 ## Deploy to Cloudflare Pages
 
