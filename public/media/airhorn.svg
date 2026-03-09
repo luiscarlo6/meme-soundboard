@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#1c1425"/>
+  <circle cx="640" cy="140" r="140" fill="#ff8a3d"/>
+  <rect x="120" y="220" width="470" height="120" rx="60" fill="#f54ea2"/>
+  <path d="M570 250h70l90 80-90 80h-70z" fill="#ffe067"/>
+  <text x="70" y="110" fill="#fff7ed" font-family="Trebuchet MS, sans-serif" font-size="64" font-weight="700">AIRHORN</text>
+</svg>

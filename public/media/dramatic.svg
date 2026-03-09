@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#140d1d"/>
+  <path d="M0 470c130-120 250-180 360-180s257 57 440 173v137H0z" fill="#f54ea2"/>
+  <path d="M0 520c150-80 280-120 390-120s250 38 410 117v83H0z" fill="#ff8a3d"/>
+  <text x="56" y="108" fill="#fdf7ef" font-family="Trebuchet MS, sans-serif" font-size="66" font-weight="700">DRAMATIC</text>
+</svg>

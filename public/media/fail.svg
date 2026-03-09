@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#101319"/>
+  <circle cx="400" cy="290" r="180" fill="#243247"/>
+  <path d="M320 230l160 160M480 230 320 390" stroke="#ff6c6c" stroke-linecap="round" stroke-width="42"/>
+  <text x="92" y="110" fill="#f6f8fb" font-family="Trebuchet MS, sans-serif" font-size="62" font-weight="700">MISSION FAILED</text>
+</svg>

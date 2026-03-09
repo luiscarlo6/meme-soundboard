@@ -1,0 +1,177 @@
+:root {
+  color-scheme: dark;
+  --bg: #0f0d13;
+  --panel: rgba(26, 22, 33, 0.82);
+  --panel-strong: rgba(39, 32, 48, 0.95);
+  --text: #f7f3eb;
+  --muted: #d4c8ba;
+  --accent: #ff8a3d;
+  --accent-2: #f54ea2;
+  --line: rgba(255, 255, 255, 0.12);
+  --shadow: 0 22px 70px rgba(0, 0, 0, 0.35);
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(245, 78, 162, 0.24), transparent 28%),
+    radial-gradient(circle at top right, rgba(255, 138, 61, 0.22), transparent 26%),
+    linear-gradient(180deg, #1a1420 0%, #0f0d13 52%, #09080b 100%);
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+
+button {
+  font: inherit;
+}
+
+code {
+  padding: 0.12rem 0.32rem;
+  border-radius: 0.35rem;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.page-shell {
+  width: min(1120px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 3rem 0 4rem;
+}
+
+.hero {
+  padding: 1.5rem 0 2rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.5rem;
+  color: var(--accent);
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(2.6rem, 5vw, 5.2rem);
+  line-height: 0.95;
+}
+
+.intro {
+  max-width: 58ch;
+  margin: 1rem 0 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.board-panel {
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 1.6rem;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+}
+
+.panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.panel-heading h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.install-button,
+.play-button {
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 140ms ease, filter 140ms ease, background 140ms ease;
+}
+
+.install-button {
+  padding: 0.7rem 1rem;
+  color: var(--text);
+  background: var(--panel-strong);
+}
+
+.install-button:hover,
+.play-button:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+}
+
+.soundboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.meme-card {
+  display: grid;
+  gap: 0.9rem;
+  padding: 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 1.2rem;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.media-frame {
+  overflow: hidden;
+  border-radius: 0.9rem;
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(135deg, rgba(255, 138, 61, 0.35), rgba(245, 78, 162, 0.28));
+}
+
+.media-frame img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-copy h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.card-copy p {
+  margin: 0.45rem 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.play-button {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  color: #1e1306;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent), #ffcd4b);
+}
+
+.play-button.is-playing {
+  background: linear-gradient(135deg, #7cff98, #d8ff69);
+}
+
+@media (max-width: 640px) {
+  .page-shell {
+    width: min(100% - 1rem, 1120px);
+    padding-top: 1.2rem;
+  }
+
+  .panel-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

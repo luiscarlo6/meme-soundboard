@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#161616">
+  <meta name="description" content="A lightweight meme soundboard for perfectly timed nonsense.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="public/icons/icon-192.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <title>Meme Soundboard</title>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <p class="eyebrow">Luiscarlo's remote control for chaos</p>
+      <h1>Meme Soundboard</h1>
+      <p class="intro">
+        Tap the right card at the right time. Replace the placeholders with your own gifs and sounds in
+        <code>public/media</code>.
+      </p>
+    </header>
+
+    <main>
+      <section class="board-panel" aria-labelledby="soundboard-title">
+        <div class="panel-heading">
+          <h2 id="soundboard-title">Board</h2>
+          <button class="install-button" id="installButton" hidden>Install app</button>
+        </div>
+        <div class="soundboard-grid" id="soundboardGrid"></div>
+      </section>
+    </main>
+  </div>
+
+  <template id="cardTemplate">
+    <article class="meme-card">
+      <div class="media-frame">
+        <img alt="" loading="lazy">
+      </div>
+      <div class="card-copy">
+        <h3></h3>
+        <p></p>
+      </div>
+      <button class="play-button" type="button"></button>
+    </article>
+  </template>
+
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>

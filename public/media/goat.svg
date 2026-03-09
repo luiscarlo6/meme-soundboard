@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#122019"/>
+  <circle cx="400" cy="300" r="190" fill="#1e4432"/>
+  <path d="M300 380c0-64 45-116 100-116s100 52 100 116" fill="#ffe7b0"/>
+  <path d="M332 252c-28-48-18-106 20-142M468 252c28-48 18-106-20-142" fill="none" stroke="#ffd46b" stroke-linecap="round" stroke-width="28"/>
+  <text x="145" y="112" fill="#f8fff6" font-family="Trebuchet MS, sans-serif" font-size="76" font-weight="700">GOAT MODE</text>
+</svg>

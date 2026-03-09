@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#191919"/>
+  <rect x="140" y="160" width="90" height="280" rx="45" fill="#f0c67f"/>
+  <rect x="220" y="255" width="350" height="90" rx="45" fill="#8d5234"/>
+  <circle cx="610" cy="300" r="105" fill="#ff8a3d"/>
+  <text x="70" y="105" fill="#fff4dc" font-family="Trebuchet MS, sans-serif" font-size="72" font-weight="700">BONK</text>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#1a1111"/>
+  <ellipse cx="400" cy="300" rx="210" ry="160" fill="#532732"/>
+  <ellipse cx="320" cy="290" rx="40" ry="56" fill="#fff6ea"/>
+  <ellipse cx="480" cy="290" rx="40" ry="56" fill="#fff6ea"/>
+  <circle cx="320" cy="308" r="16" fill="#18110f"/>
+  <circle cx="480" cy="308" r="16" fill="#18110f"/>
+  <text x="208" y="108" fill="#fff0e8" font-family="Trebuchet MS, sans-serif" font-size="78" font-weight="700">SUS ALERT</text>
+</svg>
