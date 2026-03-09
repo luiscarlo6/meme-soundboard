@@ -1,4 +1,4 @@
-const CACHE_NAME = "meme-soundboard-v4";
+const CACHE_NAME = "meme-soundboard-v5";
 const APP_ASSETS = [
   "./",
   "./index.html",
@@ -20,13 +20,16 @@ self.addEventListener("install", (event) => {
 
 self.addEventListener("activate", (event) => {
   event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(
-        keys
-          .filter((key) => key !== CACHE_NAME)
-          .map((key) => caches.delete(key))
+    caches
+      .keys()
+      .then((keys) =>
+        Promise.all(
+          keys
+            .filter((key) => key !== CACHE_NAME)
+            .map((key) => caches.delete(key))
+        )
       )
-    )
+      .then(() => self.clients.claim())
   );
 });
 
