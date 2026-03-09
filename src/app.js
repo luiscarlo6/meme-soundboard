@@ -84,7 +84,7 @@ const renderCards = (memes) => {
 
     const mediaFrame = card.querySelector(".media-frame");
     const cardCopy = card.querySelector(".card-copy");
-    const memeUrl = `meme.html?id=${encodeURIComponent(meme.id)}`;
+    const memeUrl = `meme.html#${encodeURIComponent(meme.id)}`;
 
     mediaFrame.addEventListener("click", () => {
       window.location.href = memeUrl;

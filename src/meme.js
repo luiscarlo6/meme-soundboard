@@ -110,8 +110,7 @@ const renderNotFound = () => {
 };
 
 const bootstrap = async () => {
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
+  const id = decodeURIComponent(window.location.hash.slice(1)).trim();
 
   if (!id) {
     renderNotFound();
