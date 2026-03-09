@@ -132,13 +132,17 @@ code {
 .media-frame {
   overflow: hidden;
   border-radius: 0.9rem;
-  aspect-ratio: 4 / 3;
+  min-height: 220px;
   background: linear-gradient(135deg, rgba(255, 138, 61, 0.35), rgba(245, 78, 162, 0.28));
+  display: grid;
+  place-items: center;
 }
 
 .media-frame img {
-  height: 100%;
-  object-fit: cover;
+  width: 100%;
+  height: auto;
+  max-height: 70vh;
+  object-fit: contain;
 }
 
 .card-copy h3 {

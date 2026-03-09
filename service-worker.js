@@ -1,4 +1,4 @@
-const CACHE_NAME = "meme-soundboard-v1";
+const CACHE_NAME = "meme-soundboard-v2";
 const APP_ASSETS = [
   "./",
   "./index.html",
@@ -8,12 +8,10 @@ const APP_ASSETS = [
   "./src/memes.js",
   "./public/icons/icon-192.svg",
   "./public/icons/icon-512.svg",
-  "./public/media/airhorn.svg",
-  "./public/media/bonk.svg",
-  "./public/media/dramatic.svg",
-  "./public/media/fail.svg",
-  "./public/media/goat.svg",
-  "./public/media/sus.svg"
+  "./public/media/blue-lobster.gif",
+  "./public/media/blue-lobster.mp3",
+  "./public/media/sonic-coins.gif",
+  "./public/media/sonic-coins.mp3"
 ];
 
 self.addEventListener("install", (event) => {
