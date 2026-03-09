@@ -24,5 +24,18 @@
       "audioUrl": ""
     },
     "createdAt": "2026-03-08"
+  },
+  {
+    "id": "vampiro",
+    "title": "Vampiro",
+    "description": "Vampire Hiss.",
+    "image": "public/media/vampiro.gif",
+    "buttonLabel": "Vampiro",
+    "audio": "public/media/vampiro-audio.mp3",
+    "source": {
+      "gifUrl": "https://media1.tenor.com/m/FH-O6w-BEj0AAAAC/bh187-underworld.gif",
+      "audioUrl": "https://quicksounds.com/uploads/tracks/258584019_1022132074_882998553.mp3"
+    },
+    "createdAt": "2026-03-09"
   }
 ]
