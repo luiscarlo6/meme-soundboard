@@ -1,10 +1,12 @@
-const CACHE_NAME = "meme-soundboard-v3";
+const CACHE_NAME = "meme-soundboard-v4";
 const APP_ASSETS = [
   "./",
   "./index.html",
+  "./meme.html",
   "./styles.css",
   "./manifest.webmanifest",
   "./src/app.js",
+  "./src/meme.js",
   "./data/memes.json",
   "./public/icons/icon-192.svg",
   "./public/icons/icon-512.svg"

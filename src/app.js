@@ -82,6 +82,18 @@ const renderCards = (memes) => {
       window.setTimeout(() => button.classList.remove("is-playing"), 160);
     });
 
+    const mediaFrame = card.querySelector(".media-frame");
+    const cardCopy = card.querySelector(".card-copy");
+    const memeUrl = `meme.html#${encodeURIComponent(meme.id)}`;
+
+    mediaFrame.addEventListener("click", () => {
+      window.location.href = memeUrl;
+    });
+
+    cardCopy.addEventListener("click", () => {
+      window.location.href = memeUrl;
+    });
+
     fragment.appendChild(card);
   });
 

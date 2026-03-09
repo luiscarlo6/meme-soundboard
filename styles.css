@@ -176,6 +176,77 @@ code {
   background: linear-gradient(135deg, #7cff98, #d8ff69);
 }
 
+.media-frame,
+.card-copy {
+  cursor: pointer;
+}
+
+.media-frame:hover {
+  filter: brightness(1.06);
+}
+
+.card-copy:hover h3 {
+  color: var(--accent);
+}
+
+/* ── Meme detail page ────────────────────────────────────── */
+
+.meme-page-header {
+  padding: 1.5rem 0 1rem;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.9rem;
+  background: var(--panel-strong);
+  transition: filter 140ms ease, transform 140ms ease;
+}
+
+.back-link:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.meme-detail {
+  display: grid;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: 1.6rem;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+}
+
+.meme-detail-frame {
+  max-width: 640px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.meme-detail-info {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.meme-detail-title {
+  margin: 0;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+}
+
+.meme-detail-description {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
 @media (max-width: 640px) {
   .page-shell {
     width: min(100% - 1rem, 1120px);
