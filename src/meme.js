@@ -1,5 +1,5 @@
 const detail = document.querySelector("#memeDetail");
-const dataEndpoint = "./data/memes.json";
+const dataEndpoint = new URL("../data/memes.json", import.meta.url);
 
 let audioContext;
 const audioCache = new Map();
@@ -53,6 +53,8 @@ const playAudioFile = async (source) => {
   await audio.play();
 };
 
+const resolveAssetUrl = (assetPath) => new URL(`../${assetPath}`, import.meta.url).href;
+
 const renderMeme = (meme) => {
   const article = document.createElement("article");
   article.className = "meme-detail";
@@ -61,7 +63,7 @@ const renderMeme = (meme) => {
   frame.className = "media-frame meme-detail-frame";
 
   const img = document.createElement("img");
-  img.src = meme.image;
+  img.src = resolveAssetUrl(meme.image);
   img.alt = meme.title;
   img.loading = "lazy";
   frame.appendChild(img);
@@ -85,7 +87,7 @@ const renderMeme = (meme) => {
   button.addEventListener("click", async () => {
     button.classList.add("is-playing");
     if (meme.audio) {
-      await playAudioFile(meme.audio);
+      await playAudioFile(resolveAssetUrl(meme.audio));
     } else {
       await playTone(meme.sound);
     }
