@@ -176,6 +176,12 @@ code {
   background: linear-gradient(135deg, #7cff98, #d8ff69);
 }
 
+.meme-card-link {
+  display: contents;
+  color: inherit;
+  text-decoration: none;
+}
+
 .media-frame,
 .card-copy {
   cursor: pointer;

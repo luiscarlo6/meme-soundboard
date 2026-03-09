@@ -1,7 +1,7 @@
 const grid = document.querySelector("#soundboardGrid");
 const template = document.querySelector("#cardTemplate");
 const installButton = document.querySelector("#installButton");
-const dataEndpoint = "./data/memes.json";
+const dataEndpoint = new URL("../data/memes.json", import.meta.url);
 
 let audioContext;
 let deferredPrompt;
@@ -56,6 +56,8 @@ const playAudioFile = async (source) => {
   await audio.play();
 };
 
+const resolveAssetUrl = (assetPath) => new URL(`../${assetPath}`, import.meta.url).href;
+
 const renderCards = (memes) => {
   const fragment = document.createDocumentFragment();
 
@@ -66,7 +68,7 @@ const renderCards = (memes) => {
     const description = card.querySelector("p");
     const button = card.querySelector(".play-button");
 
-    image.src = meme.image;
+    image.src = resolveAssetUrl(meme.image);
     image.alt = meme.title;
     title.textContent = meme.title;
     description.textContent = meme.description;
@@ -75,24 +77,17 @@ const renderCards = (memes) => {
     button.addEventListener("click", async () => {
       button.classList.add("is-playing");
       if (meme.audio) {
-        await playAudioFile(meme.audio);
+        await playAudioFile(resolveAssetUrl(meme.audio));
       } else {
         await playTone(meme.sound);
       }
       window.setTimeout(() => button.classList.remove("is-playing"), 160);
     });
 
-    const mediaFrame = card.querySelector(".media-frame");
-    const cardCopy = card.querySelector(".card-copy");
-    const memeUrl = `meme.html#${encodeURIComponent(meme.id)}`;
+    const cardLink = card.querySelector(".meme-card-link");
+    const memeUrl = `./meme/#${encodeURIComponent(meme.id)}`;
 
-    mediaFrame.addEventListener("click", () => {
-      window.location.href = memeUrl;
-    });
-
-    cardCopy.addEventListener("click", () => {
-      window.location.href = memeUrl;
-    });
+    cardLink.href = memeUrl;
 
     fragment.appendChild(card);
   });
