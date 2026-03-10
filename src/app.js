@@ -6,6 +6,7 @@ const dataEndpoint = new URL("../data/memes.json", import.meta.url);
 let audioContext;
 let deferredPrompt;
 const audioCache = new Map();
+let currentAudio = null;
 
 const getAudioContext = () => {
   if (!audioContext) {
@@ -44,6 +45,11 @@ const playTone = async (sound) => {
 };
 
 const playAudioFile = async (source) => {
+  if (currentAudio && !currentAudio.paused) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+  }
+
   let audio = audioCache.get(source);
 
   if (!audio) {
@@ -52,6 +58,7 @@ const playAudioFile = async (source) => {
     audioCache.set(source, audio);
   }
 
+  currentAudio = audio;
   audio.currentTime = 0;
   await audio.play();
 };
