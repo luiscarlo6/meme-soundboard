@@ -4,6 +4,7 @@ Static meme soundboard with:
 
 - responsive card grid
 - one-tap sound playback
+- share to WhatsApp (image + audio)
 - installable PWA basics
 - zero build step for Cloudflare Pages
 
@@ -24,6 +25,13 @@ npx serve .
 ```
 
 Then open `http://localhost:4173`.
+
+## Share to WhatsApp
+
+Every meme card and detail page has a green **Share** button.
+
+- On mobile (Android/iOS): tapping **Share** invokes the native share sheet so you can pick WhatsApp directly. When the meme has an audio file the sheet attaches both the image and the MP3, so the recipient can see the GIF and play the sound right from their inbox.
+- On desktop or browsers that don't support file-sharing via the Web Share API: tapping **Share** opens `https://wa.me/` in a new tab pre-filled with the meme title and a link to the detail page.
 
 ## Customize the memes
 

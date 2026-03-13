@@ -176,6 +176,27 @@ code {
   background: linear-gradient(135deg, #7cff98, #d8ff69);
 }
 
+.share-button {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  color: #fff;
+  font-weight: 600;
+  background: #25d366;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 140ms ease, filter 140ms ease;
+}
+
+.share-button:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.share-button.is-sharing {
+  filter: brightness(0.85);
+}
+
 .meme-card-link {
   display: contents;
   color: inherit;
