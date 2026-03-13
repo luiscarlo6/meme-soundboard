@@ -13,6 +13,19 @@
     "createdAt": "2026-03-08"
   },
   {
+    "id": "jugo-de-cactus",
+    "title": "Jugo de cactus",
+    "description": "Jugo de cactus.",
+    "image": "public/media/jugo-de-cactus.gif",
+    "buttonLabel": "It'll Quench Ya",
+    "audio": "public/media/jugo-de-cactus-audio.mp3",
+    "source": {
+      "gifUrl": "https://media.tenor.com/l5ywqR0MJHsAAAAi/suit-yourself-sokka.gif",
+      "audioUrl": "https://www.myinstants.com/media/sounds/cactus-juice-salesman-sokka-of-the-southern-water-tribe.mp3"
+    },
+    "createdAt": "2026-03-13"
+  },
+  {
     "id": "sonic-dropping-coins",
     "title": "Sonic Dropping Coins",
     "description": "For instant failure, damage, and wallet-collapse timing.",
