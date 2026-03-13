@@ -1,3 +1,5 @@
+import { shareMeme } from "./share.js";
+
 const grid = document.querySelector("#soundboardGrid");
 const template = document.querySelector("#cardTemplate");
 const installButton = document.querySelector("#installButton");
@@ -65,6 +67,9 @@ const playAudioFile = async (source) => {
 
 const resolveAssetUrl = (assetPath) => new URL(`../${assetPath}`, import.meta.url).href;
 
+const buildMemeDetailUrl = (memeId) =>
+  new URL(`./meme/#${encodeURIComponent(memeId)}`, window.location.href).href;
+
 const renderCards = (memes) => {
   const fragment = document.createDocumentFragment();
 
@@ -74,6 +79,7 @@ const renderCards = (memes) => {
     const title = card.querySelector("h3");
     const description = card.querySelector("p");
     const button = card.querySelector(".play-button");
+    const shareButton = card.querySelector(".share-button");
 
     image.src = resolveAssetUrl(meme.image);
     image.alt = meme.title;
@@ -95,6 +101,18 @@ const renderCards = (memes) => {
     const memeUrl = `./meme/#${encodeURIComponent(meme.id)}`;
 
     cardLink.href = memeUrl;
+
+    shareButton.addEventListener("click", async (event) => {
+      event.stopPropagation();
+      shareButton.classList.add("is-sharing");
+      shareButton.disabled = true;
+      try {
+        await shareMeme(meme, buildMemeDetailUrl(meme.id), resolveAssetUrl);
+      } finally {
+        shareButton.classList.remove("is-sharing");
+        shareButton.disabled = false;
+      }
+    });
 
     fragment.appendChild(card);
   });

@@ -1,3 +1,5 @@
+import { shareMeme } from "./share.js";
+
 const detail = document.querySelector("#memeDetail");
 const dataEndpoint = new URL("../data/memes.json", import.meta.url);
 
@@ -101,9 +103,27 @@ const renderMeme = (meme) => {
     window.setTimeout(() => button.classList.remove("is-playing"), 160);
   });
 
+  const shareButton = document.createElement("button");
+  shareButton.className = "share-button";
+  shareButton.type = "button";
+  shareButton.setAttribute("aria-label", "Share on WhatsApp");
+  shareButton.textContent = "Share";
+
+  shareButton.addEventListener("click", async () => {
+    shareButton.classList.add("is-sharing");
+    shareButton.disabled = true;
+    try {
+      await shareMeme(meme, window.location.href, resolveAssetUrl);
+    } finally {
+      shareButton.classList.remove("is-sharing");
+      shareButton.disabled = false;
+    }
+  });
+
   info.appendChild(h1);
   info.appendChild(desc);
   info.appendChild(button);
+  info.appendChild(shareButton);
 
   article.appendChild(frame);
   article.appendChild(info);
