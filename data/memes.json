@@ -26,6 +26,19 @@
     "createdAt": "2026-03-13"
   },
   {
+    "id": "lizard-lizard",
+    "title": "Lizard Lizard",
+    "description": "Para decir dracarys",
+    "image": "public/media/lizard-lizard.jpg",
+    "buttonLabel": "Lizard",
+    "audio": "public/media/lizard-lizard-audio.mp3",
+    "source": {
+      "gifUrl": "https://cards.scryfall.io/normal/front/d/c/dc745de1-a426-4747-9aea-7da8ab8ed25f.jpg",
+      "audioUrl": "https://lizardbutton.org/lizard-button.mp3"
+    },
+    "createdAt": "2026-03-20"
+  },
+  {
     "id": "sonic-dropping-coins",
     "title": "Sonic Dropping Coins",
     "description": "For instant failure, damage, and wallet-collapse timing.",
